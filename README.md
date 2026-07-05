@@ -1,2 +1,0 @@
-# paragonit
-Official Company Website
