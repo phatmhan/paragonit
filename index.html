@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Paragon IT | Technology Done Right</title>
+  <!-- Google Fonts + Simple CSS Reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-strong);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Dark / Enterprise Tech Color Variables */
+    :root{
+      --bg: #04070d;
+      --surface: #0b1220;
+      --surface-2: #111d31;
+      --muted: #8ea2bf;
+      --primary: #4e8dff;
+      --accent: #20d9b4;
+      --neon: #6ed8ff;
+      --grid-line: rgba(121, 183, 255, 0.12);
+      --glass: rgba(78, 141, 255, 0.14);
+      --glass-2: rgba(78, 141, 255, 0.08);
+      --card-shadow: 0 26px 56px -26px rgba(0, 0, 0, 0.9);
+      --bg-alt: #08111f;
+      --text-strong: #f4f8ff;
+      color-scheme: dark;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Header / Nav */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      gap: 20px;
+      background: linear-gradient(180deg, rgba(14,49,71,0.02), transparent);
+      border-bottom: 1px solid rgba(14,49,71,0.04);
+      backdrop-filter: blur(4px);
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: 1200;
+      transition: box-shadow 0.18s ease, background 0.18s ease, padding 0.12s ease;
+    }
+
+    /* When navbar is fixed at top it should have slightly more contrast */
+    .navbar.fixed-elev {
+      box-shadow: 0 10px 30px rgba(14,49,71,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-bottom-color: rgba(14,49,71,0.06);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .logo-icon {
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo-sub {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #2C9E8A;
+      letter-spacing: 0.3px;
+      border-left: 2px solid #2C9E8A;
+      padding-left: 10px;
+    }
+
+    .site-logo {
+      height: 56px;
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+      filter: drop-shadow(0 6px 18px rgba(14,49,71,0.06));
+    }
+
+    /* imitation of the attached PNG style: "Paragon IT" + slogan */
+    .brand-block h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #0B2B40;
+      line-height: 1.2;
+      margin: 0;
+      background: linear-gradient(90deg, #e45756 0%, #ffd24a 33%, #35c07a 66%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 4px 18px rgba(14,49,71,0.04);
+    }
+    .brand-block .slogan {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-weight: 600;
+    }
+    .nav-toggle{ display:none; background:transparent; border:0; cursor:pointer; padding:8px; border-radius:8px; }
+    .nav-toggle .hamburger{ width:22px; height:2px; background:var(--text-strong); display:block; position:relative; }
+    .nav-toggle .hamburger::before, .nav-toggle .hamburger::after{ content:''; display:block; height:2px; background:var(--text-strong); position:absolute; left:0; right:0; }
+    .nav-toggle .hamburger::before{ top:-6px; }
+    .nav-toggle .hamburger::after{ top:6px; }
+    .nav-links a {
+      text-decoration: none;
+      color: #0B2B40;
+      transition: color 0.15s;
+      font-size: 0.98rem;
+      opacity: 0.95;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 800;
+    }
+    .nav-links a.active::after{
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg,var(--primary),var(--accent));
+      border-radius: 4px;
+      margin-top: 8px;
+      width: 60%;
+      margin-left: 20%;
+    }
+    .btn-outline {
+      border: 1.5px solid rgba(30,111,159,0.12);
+      background: transparent;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: var(--primary);
+      transition: all 0.18s ease;
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 70px;
+      background: linear-gradient(160deg, var(--bg-alt) 0%, var(--bg) 100%);
+      border-radius: 0 0 28px 28px;
+      border: 1px solid rgba(14,49,71,0.03);
+      box-shadow: 0 20px 40px -24px rgba(14,49,71,0.06);
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-content {
+      flex: 1.2;
+    }
+    .hero-badge {
+      background: var(--primary);
+      color: white;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      border: 1px solid rgba(30,111,159,0.08);
+    }
+    .hero-content h1 {
+      font-size: 3.0rem;
+      font-weight: 800;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: #0B2B40;
+    }
+    .hero-content h1 span {
+      color: var(--primary);
+      border-bottom: 3px solid rgba(44,158,138,0.12);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), #16607f);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 48px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: var(--card-shadow);
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px -20px rgba(14,49,71,0.08);
+    }
+    .hero-stats {
+      flex: 0.9;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 12px 28px rgba(14,49,71,0.04);
+      border: 1px solid rgba(14,49,71,0.03);
+    }
+    .stat-item {
+      margin-bottom: 24px;
+    }
+    .stat-number {
+      font-size: 2.0rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .stat-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Services Section */
+    .section {
+      padding: 96px 0;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.9rem, 2.6vw, 2.35rem);
+      font-weight: 700;
+      color: #0B2B40;
+      margin-bottom: 16px;
+      letter-spacing: -0.025em;
+    }
+    .section-header p {
+      color: #4A5B6E;
+      font-size: 1.1rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px 24px;
+      transition: all 0.25s ease;
+      border: 1px solid #E9EEF3;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: #cde3ef;
+      box-shadow: 0 20px 30px -12px rgba(30,111,159,0.12);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      background: #EFF6FA;
+      padding: 12px;
+      border-radius: 20px;
+      color: #1E6F9F;
+    }
+    .service-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0B2B40;
+    }
+    .service-card p {
+      color: #556579;
+      font-size: 0.95rem;
+    }
+
+    /* Showcase / Integrated solutions */
+    .showcase-section{
+      margin: 40px 0;
+      padding: 44px 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .showcase-grid{
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .showcase-left{ flex: 1 1 420px; }
+    .showcase-left h2{ font-size: clamp(1.6rem, 2.1vw, 2rem); color: #0B2B40; margin-bottom: 12px; line-height:1.05; }
+    .showcase-left h2 span{ color: var(--primary); }
+    .showcase-left .muted{ color: #9fb0bf; margin: 18px 0; max-width: 580px; }
+    .showcase-right{ flex: 1 1 320px; display: flex; gap: 16px; flex-wrap: wrap; justify-content:flex-end; }
+    .mini-card{ background: var(--surface); border-radius: 16px; padding: 18px; width: 160px; text-align: center; box-shadow: 0 12px 30px -16px rgba(45,183,255,0.08); border:1px solid rgba(255,255,255,0.02); }
+    .mini-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      border-radius: 10px;
+      background: rgba(57, 160, 255, 0.12);
+      color: #80c2ff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      box-shadow: inset 0 0 0 1px rgba(125, 194, 255, 0.2);
+    }
+    .mini-title{ font-weight: 700; margin-top: 6px; color: #0B2B40; }
+    .mini-sub{ color: var(--muted); display:block; margin-top:6px; }
+
+    /* Solutions & Insights sections */
+    .solutions-section{ padding: 64px 0; margin-top: 8px; }
+    .solutions-grid{ display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 24px; }
+    .solution-card{ background: var(--surface); border:1px solid rgba(14,49,71,0.04); padding:22px; border-radius:14px; box-shadow: 0 12px 28px rgba(14,49,71,0.04); }
+    .solution-card h4{ color:#0B2B40; margin-bottom:8px; font-size:1.05rem; }
+    .solution-card p{ color: var(--muted); font-size:0.95rem; }
+
+    .insights-section{ padding: 64px 0; margin-top: 8px; border-top:1px solid rgba(255,255,255,0.02); }
+    .insights-grid{ display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; }
+    .insight-card{ background: var(--surface); padding:18px; border-radius:12px; border:1px solid rgba(14,49,71,0.03); }
+    .insight-card h5{ color:#0B2B40; margin-bottom:8px; font-size:1rem; }
+    .insight-card .meta{ color:var(--muted); font-size:0.85rem; margin-bottom:10px; }
+    .insight-card p{ color:var(--muted); font-size:0.95rem; }
+
+    /* Partners Section */
+    .partners-section{ padding: 56px 0; }
+    .partners-grid{ display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 18px; align-items: center; }
+    .partner-card{ background: var(--surface); border:1px solid rgba(14,49,71,0.04); padding:18px; border-radius:12px; text-align:center; box-shadow: 0 10px 24px rgba(14,49,71,0.03); }
+    .partner-logo{ height:56px; width:auto; margin:0 auto 12px; filter:grayscale(20%); opacity:0.95; }
+    .partner-logo[alt="Auto Junk"]{ height:82px; mix-blend-mode: screen; }
+    .partner-name{ font-weight:700; color:#0B2B40; margin-bottom:6px; }
+    .partner-desc{ color:var(--muted); font-size:0.92rem; }
+
+    /* Service detail modal */
+    .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(4,20,30,0.6); z-index:1400; }
+    .modal[aria-hidden="false"]{ display:flex; }
+    .modal-inner{ position:relative; background:var(--surface); border-radius:12px; width: min(900px, 92%); max-height:86vh; overflow:auto; padding:28px; box-shadow: 0 30px 60px rgba(14,49,71,0.12); }
+    .modal-close{ position:absolute; top:12px; right:14px; background:none; border:0; font-size:1.1rem; cursor:pointer; color:var(--muted); }
+    .modal h3{ margin:0 0 8px 0; }
+    .modal p{ color:var(--muted); }
+    .modal .modal-bullets{ margin-top:12px; }
+    .modal .modal-bullets li{ margin-bottom:8px; }
+    .service-more-btn{ margin-top:16px; display:inline-block; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(105deg, #0B2B40 0%, #134B66 100%);
+      border-radius: 48px;
+      margin: 40px 32px 60px;
+      padding: 64px 48px;
+      text-align: center;
+      color: white;
+    }
+    .cta-section h3 {
+      font-size: clamp(1.65rem, 2.2vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .cta-section p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 32px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-light {
+      background: white;
+      color: #0B2B40;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.2s;
+    }
+    .btn-light:hover {
+      background: #2C9E8A;
+      color: white;
+      transform: scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(180deg, rgba(8, 13, 23, 0.95), rgba(6, 10, 18, 0.98));
+      color: #556579;
+      padding: 48px 0 24px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(138, 173, 225, 0.16);
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-col p {
+      max-width: 260px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .footer-col h4 {
+      color: #0B2B40;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #556579;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .copyright {
+      text-align: center;
+      border-top: 1px solid #2A3A48;
+      padding-top: 28px;
+      font-size: 0.85rem;
+    }
+
+    /* Dark enterprise-tech visual overrides */
+    body {
+      background:
+        radial-gradient(1100px 720px at 88% -8%, rgba(78, 141, 255, 0.22), transparent 60%),
+        radial-gradient(900px 620px at -4% 24%, rgba(32, 217, 180, 0.16), transparent 54%),
+        linear-gradient(180deg, #04070d 0%, #070d16 100%);
+      color: var(--text-strong);
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.66), transparent 86%);
+      z-index: -1;
+    }
+    .logo-icon,
+    .stat-number,
+    .nav-links a.active,
+    .hero-content h1 span,
+    .section-header h2 span {
+      color: var(--primary);
+    }
+    .brand-block h1,
+    .hero-content h1,
+    .section-header h2,
+    .showcase-left h2,
+    .solution-card h4,
+    .insight-card h5,
+    .partner-name,
+    .footer-col h4,
+    .cta-section h3 {
+      color: var(--text-strong);
+      text-shadow: none;
+    }
+    .hero-content h1,
+    .section-header h2,
+    .showcase-left h2 {
+      letter-spacing: -0.02em;
+    }
+    .navbar {
+      padding: 18px 0;
+      background: linear-gradient(180deg, rgba(7, 11, 18, 0.94), rgba(7, 11, 18, 0.8));
+      border-bottom: 1px solid rgba(138, 173, 225, 0.18);
+      backdrop-filter: blur(12px);
+    }
+    .navbar.fixed-elev {
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(180deg, rgba(6, 10, 18, 0.98), rgba(7, 12, 20, 0.94));
+      border-bottom-color: rgba(138, 173, 225, 0.24);
+    }
+    .site-logo {
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    }
+    .logo-sub,
+    .brand-block .slogan,
+    .hero-desc,
+    .section-header p,
+    .service-card p,
+    .showcase-left .muted,
+    .solution-card p,
+    .insight-card p,
+    .insight-card .meta,
+    .partner-desc,
+    .footer-col p,
+    .footer-links a,
+    .stat-label {
+      color: var(--muted);
+    }
+    .logo-sub,
+    .brand-block .slogan,
+    .hero-badge,
+    .insight-card .meta {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a {
+      color: #c8d6ec;
+    }
+    .nav-links a:hover,
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .btn-outline {
+      border: 1px solid rgba(57, 160, 255, 0.34);
+      color: #d9e8ff;
+      background: rgba(57, 160, 255, 0.06);
+    }
+    .btn-outline:hover {
+      background: linear-gradient(120deg, #1f6bb0, #2b90d4);
+      color: #f5fbff;
+      border-color: rgba(57, 160, 255, 0.7);
+    }
+    .btn-primary {
+      background: linear-gradient(100deg, #2f66c9, #4e8dff);
+      box-shadow: 0 0 0 1px rgba(168, 215, 255, 0.2), 0 20px 36px -18px rgba(0, 0, 0, 0.74);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 0 1px rgba(168, 215, 255, 0.36), 0 24px 40px -16px rgba(0, 0, 0, 0.8);
+    }
+    .hero {
+      padding: 132px 0 104px;
+      background: linear-gradient(155deg, #0b1325 0%, #09111f 58%, #07111d 100%);
+      border: 1px solid rgba(138, 173, 225, 0.16);
+      box-shadow: 0 24px 44px -24px rgba(0, 0, 0, 0.62);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -30% 0 auto auto;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(78, 141, 255, 0.18), transparent 70%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(78, 141, 255, 0.08);
+      border: 1px solid rgba(121, 165, 224, 0.34);
+      color: #cfe1ff;
+      box-shadow: none;
+      text-transform: uppercase;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(32, 217, 180, 0.18);
+      flex-shrink: 0;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 4.2vw, 4.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      max-width: 760px;
+    }
+    .hero-content h1 span {
+      display: inline-block;
+      padding-bottom: 2px;
+      border-bottom: 2px solid rgba(78, 141, 255, 0.45);
+    }
+    .hero-stats,
+    .service-card,
+    .mini-card,
+    .solution-card,
+    .insight-card,
+    .modal-inner {
+      background: linear-gradient(180deg, rgba(16, 24, 39, 0.96), rgba(13, 20, 34, 0.9));
+      border: 1px solid rgba(138, 173, 225, 0.18);
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(10px);
+    }
+    .partner-card {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 12px;
+    }
+    .service-card:hover {
+      border-color: rgba(78, 141, 255, 0.58);
+      box-shadow: 0 26px 44px -20px rgba(0, 0, 0, 0.72);
+      transform: translateY(-6px) scale(1.01);
+    }
+    .service-icon {
+      background: rgba(57, 160, 255, 0.12);
+      color: #80c2ff;
+      box-shadow: inset 0 0 0 1px rgba(125, 194, 255, 0.2);
+    }
+    .services-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .service-card {
+      border-radius: 18px;
+      padding: 22px 20px;
+      border: 1px solid rgba(121, 165, 224, 0.22);
+      background:
+        linear-gradient(180deg, rgba(16, 24, 39, 0.96), rgba(12, 19, 31, 0.94)),
+        linear-gradient(120deg, rgba(78, 141, 255, 0.14), transparent 54%);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .service-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+    .service-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
+      color: #9ec7ff;
+      border: 1px solid rgba(121, 215, 255, 0.4);
+      padding: 5px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      background: rgba(57, 160, 255, 0.1);
+    }
+    .service-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.86rem;
+      line-height: 1;
+      padding: 11px 12px;
+      min-width: 48px;
+      text-align: center;
+      border-radius: 10px;
+      letter-spacing: 0.04em;
+    }
+    .service-card h3 {
+      font-size: 1.08rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+      color: #eaf2ff;
+    }
+    .service-card p {
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      color: #9fb2c9;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .service-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: #b9d8ff;
+      border: 1px solid rgba(121, 165, 224, 0.28);
+      background: rgba(57, 160, 255, 0.09);
+      padding: 4px 8px;
+      border-radius: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .service-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 2px;
+      margin-bottom: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(121, 165, 224, 0.34);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+    }
+    .service-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #d4e6ff;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .service-metric {
+      color: #95aec9;
+      text-align: right;
+    }
+    .service-dot {
+      --pulse: rgba(50, 216, 165, 0.65);
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #32d8a5;
+      box-shadow: 0 0 0 0 var(--pulse);
+      animation: statusPulse 1.8s ease-out infinite;
+      flex-shrink: 0;
+    }
+    .service-dot.warn {
+      --pulse: rgba(255, 209, 102, 0.6);
+      background: #ffd166;
+    }
+    .service-dot.info {
+      --pulse: rgba(122, 199, 255, 0.6);
+      background: #7ac7ff;
+    }
+    .service-more-btn {
+      margin-top: 2px;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .showcase-section,
+    .insights-section,
+    footer {
+      background: transparent;
+      border-color: rgba(138, 173, 225, 0.14);
+    }
+    .showcase-section {
+      border: 1px solid rgba(138, 173, 225, 0.14);
+      border-radius: 24px;
+      padding: 36px 0;
+      background: linear-gradient(90deg, rgba(78, 141, 255, 0.08), rgba(32, 217, 180, 0.05));
+    }
+    .cta-section {
+      background: linear-gradient(108deg, #0f3d66 0%, #0d5078 48%, #0f624f 100%);
+      border: 1px solid rgba(157, 214, 255, 0.26);
+      box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section p {
+      color: #d2e7ff;
+      opacity: 0.95;
+    }
+    .btn-light {
+      background: #e7f3ff;
+      color: #05223a;
+    }
+    .btn-light:hover {
+      background: #27d3b8;
+      color: #042132;
+    }
+    .modal {
+      background: rgba(2, 8, 14, 0.78);
+    }
+    .copyright {
+      border-top-color: rgba(138, 173, 225, 0.22);
+      color: #7f93ad;
+    }
+    .footer-col h3 {
+      color: #eaf2ff !important;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.4px;
+    }
+    .navbar,
+    .hero,
+    .service-card,
+    .solution-card,
+    .insight-card,
+    .partner-card,
+    .hero-stats,
+    .cta-section {
+      animation: riseIn 650ms ease both;
+    }
+    .service-card:nth-child(2),
+    .solution-card:nth-child(2),
+    .insight-card:nth-child(2),
+    .partner-card:nth-child(2) { animation-delay: 80ms; }
+    .service-card:nth-child(3),
+    .solution-card:nth-child(3),
+    .insight-card:nth-child(3),
+    .partner-card:nth-child(3) { animation-delay: 140ms; }
+    .service-card:nth-child(4),
+    .solution-card:nth-child(4),
+    .partner-card:nth-child(4) { animation-delay: 180ms; }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes statusPulse {
+      0% {
+        box-shadow: 0 0 0 0 var(--pulse);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .navbar,
+      .hero,
+      .service-card,
+      .solution-card,
+      .insight-card,
+      .partner-card,
+      .hero-stats,
+      .cta-section {
+        animation: none !important;
+      }
+      .service-dot {
+        animation: none !important;
+      }
+    }
+    @media (max-width: 1100px) {
+      .container {
+        padding: 0 24px;
+      }
+      .hero-content h1 {
+        font-size: clamp(2.1rem, 5.2vw, 2.7rem);
+      }
+      .hero-grid {
+        gap: 28px;
+      }
+      .showcase-grid,
+      .hero-grid {
+        align-items: stretch;
+      }
+      .showcase-right {
+        justify-content: flex-start;
+      }
+      .cta-section {
+        margin-left: 24px;
+        margin-right: 24px;
+        border-radius: 32px;
+      }
+      .footer-grid {
+        gap: 26px;
+      }
+      .partner-logo {
+        height: 48px;
+      }
+      .partner-logo[alt="Auto Junk"] {
+        height: 70px;
+      }
+    }
+    @media (max-width: 920px) {
+      .section {
+        padding: 64px 0;
+      }
+      .hero {
+        padding: 56px 0 54px;
+      }
+      .hero-grid,
+      .showcase-grid {
+        flex-direction: column;
+      }
+      .hero-content,
+      .hero-stats,
+      .showcase-left,
+      .showcase-right {
+        flex: 1 1 100%;
+        width: 100%;
+      }
+      .hero-stats {
+        padding: 22px 20px;
+      }
+      .section-header {
+        margin-bottom: 34px;
+      }
+      .section-header h2 {
+        font-size: clamp(1.7rem, 5vw, 2.1rem);
+      }
+      .section-header p {
+        font-size: 1rem;
+      }
+      .services-grid,
+      .solutions-grid,
+      .insights-grid,
+      .partners-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 20px;
+      }
+      .modal-inner {
+        width: min(96%, 760px);
+        padding: 22px;
+      }
+      .cta-section {
+        padding: 46px 28px;
+      }
+      .cta-section h3 {
+        font-size: 1.65rem;
+      }
+    }
+    @media (max-width: 800px) {
+      .navbar {
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        gap: 10px;
+      }
+      .brand-block {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .brand-block .logo-link {
+        min-width: 0;
+      }
+      .brand-block h1 {
+        font-size: 1.28rem;
+      }
+      .brand-block .slogan {
+        font-size: 0.74rem;
+      }
+      .nav-toggle{ display:block; }
+      .nav-links{ display:none; position:absolute; left:0; right:0; top:100%; background:rgba(11, 18, 32, 0.985); padding:14px 16px 16px; flex-direction:column; gap:8px; border-bottom-left-radius:12px; border-bottom-right-radius:12px; box-shadow: 0 16px 30px rgba(0,0,0,0.5); max-height: calc(100vh - 72px); max-height: calc(100dvh - 72px); overflow:auto; }
+      .navbar.nav-open .nav-links{ display:flex; }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links a{ padding:11px 8px; display:block; width:100%; }
+      .nav-links .btn-outline {
+        display: inline-flex;
+        justify-content: center;
+      }
+      .site-logo{ height:44px; }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .container {
+        padding: 0 24px;
+      }
+      .section {
+        padding: 56px 0;
+      }
+      .service-status {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .service-metric {
+        text-align: left;
+      }
+      .services-grid,
+      .solutions-grid,
+      .insights-grid,
+      .partners-grid,
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .showcase-right {
+        justify-content: flex-start;
+      }
+      .mini-card {
+        width: 100%;
+        max-width: 260px;
+      }
+      .cta-section {
+        margin: 16px;
+        padding: 40px 24px;
+        border-radius: 24px;
+      }
+      .btn-primary,
+      .btn-light {
+        width: 100%;
+        text-align: center;
+      }
+      .modal-inner {
+        width: min(96%, 560px);
+        padding: 18px 16px;
+        max-height: 88vh;
+        max-height: 88dvh;
+      }
+      .modal-close {
+        top: 10px;
+        right: 10px;
+      }
+    }
+    @media (max-width: 380px) {
+      .container {
+        padding: 0 12px;
+      }
+      .navbar {
+        padding: 8px 12px;
+      }
+      .brand-block {
+        gap: 6px;
+      }
+      .site-logo {
+        height: 34px;
+      }
+      .brand-block h1 {
+        font-size: 0.92rem;
+      }
+      .brand-block .slogan {
+        font-size: 0.6rem;
+      }
+      .hero {
+        padding: 36px 0 38px;
+      }
+      .hero-content h1 {
+        font-size: 1.52rem;
+      }
+      .hero-desc {
+        font-size: 0.88rem;
+      }
+      .hero-badge {
+        padding: 5px 10px;
+        font-size: 0.62rem;
+      }
+      .hero-stats {
+        padding: 14px 12px;
+      }
+      .stat-item {
+        margin-bottom: 16px;
+      }
+      .stat-number {
+        font-size: 1.34rem;
+      }
+      .section {
+        padding: 42px 0;
+      }
+      .section-header h2 {
+        font-size: 1.28rem;
+      }
+      .section-header p {
+        font-size: 0.88rem;
+      }
+      .service-card,
+      .solution-card,
+      .insight-card,
+      .partner-card,
+      .mini-card {
+        padding: 12px;
+      }
+      .service-icon {
+        min-width: 42px;
+        padding: 9px 10px;
+        font-size: 0.76rem;
+      }
+      .service-card h3 {
+        font-size: 0.96rem;
+      }
+      .service-card p,
+      .solution-card p,
+      .insight-card p,
+      .partner-desc {
+        font-size: 0.84rem;
+      }
+      .service-status {
+        gap: 6px;
+      }
+      .service-more-btn,
+      .btn-primary,
+      .btn-light {
+        font-size: 0.75rem;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .cta-section {
+        margin: 10px;
+        padding: 24px 12px;
+      }
+      .cta-section h3 {
+        font-size: 1.2rem;
+      }
+      .cta-section p {
+        font-size: 0.86rem;
+        margin-bottom: 20px;
+      }
+    }
+    @media (max-width: 900px) and (orientation: landscape) and (max-height: 540px) {
+      .navbar {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+      .nav-links {
+        max-height: calc(100dvh - 56px);
+      }
+      .hero {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      .hero-grid {
+        gap: 16px;
+      }
+      .hero-content h1 {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+      }
+      .hero-desc {
+        margin-bottom: 14px;
+      }
+      .hero-stats {
+        padding: 14px;
+      }
+      .section {
+        padding: 36px 0;
+      }
+      .modal-inner {
+        max-height: 94dvh;
+      }
+      .cta-section {
+        padding-top: 26px;
+        padding-bottom: 26px;
+      }
+    }
+    @media (max-width: 540px) {
+      .container {
+        padding: 0 16px;
+      }
+      .site-logo {
+        height: 38px;
+      }
+      .brand-block h1 {
+        font-size: 1.05rem;
+      }
+      .brand-block .slogan {
+        font-size: 0.66rem;
+        margin-top: 2px;
+      }
+      .hero {
+        padding: 42px 0 44px;
+        border-radius: 0 0 18px 18px;
+      }
+      .hero-badge {
+        margin-bottom: 14px;
+        font-size: 0.68rem;
+      }
+      .hero-content h1 {
+        font-size: 1.78rem;
+        margin-bottom: 14px;
+      }
+      .hero-desc {
+        font-size: 0.94rem;
+        margin-bottom: 18px;
+      }
+      .stat-number {
+        font-size: 1.56rem;
+      }
+      .section {
+        padding: 48px 0;
+      }
+      .section-header {
+        margin-bottom: 24px;
+      }
+      .section-header h2 {
+        font-size: 1.46rem;
+      }
+      .section-header p {
+        font-size: 0.94rem;
+      }
+      .service-card,
+      .solution-card,
+      .insight-card,
+      .partner-card {
+        padding: 16px;
+      }
+      .service-tags {
+        gap: 6px;
+      }
+      .service-tag,
+      .service-code,
+      .service-state,
+      .service-metric {
+        font-size: 0.66rem;
+      }
+      .service-more-btn {
+        width: 100%;
+      }
+      .cta-section {
+        margin: 12px;
+        padding: 30px 16px;
+      }
+      .cta-section h3 {
+        font-size: 1.35rem;
+      }
+      .cta-section p {
+        font-size: 0.94rem;
+      }
+      .footer-col p {
+        max-width: 100%;
+      }
+      .copyright {
+        padding-top: 18px;
+        font-size: 0.76rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header / Navigation -->
+<div class="container">
+  <div class="navbar">
+    <div class="brand-block">
+      <a href="/" class="logo-link" style="display:flex;align-items:center;gap:2px;text-decoration:none;color:inherit;">
+        <img src="assets/logo-transparent.png" alt="Paragon IT logo" class="site-logo">
+        <div>
+          <h1>Paragon IT</h1>
+          <div class="slogan">Technology Done Right</div>
+        </div>
+      </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#solutions-list">Solutions</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#" class="btn-outline">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Enterprise Technology Platform</div>
+      <h1>Engineering the digital backbone of <span>global enterprises</span></h1>
+      <p class="hero-desc">From secure cloud foundations to AI-driven operations, Paragon IT delivers the infrastructure, software and strategy behind modern industry leaders.</p>
+      <a href="#services" class="btn-primary">Explore Platform Services →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Successful Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client Retention Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Global Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section (All 10+ services) -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>What we deliver — <span style="color:#1E6F9F;">Technology Done Right</span></h2>
+      <p>Comprehensive IT solutions crafted to accelerate digital transformation and secure your infrastructure.</p>
+    </div>
+    <div class="services-grid">
+      <!-- 1 Software Development -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">SD</div>
+          <div class="service-code">SRV-01</div>
+        </div>
+        <h3>Software Development</h3>
+        <p>Custom enterprise software, scalable apps, and modern DevOps pipelines. We build future-proof systems.</p>
+        <div class="service-tags">
+          <span class="service-tag">API</span>
+          <span class="service-tag">DevOps</span>
+          <span class="service-tag">Microservices</span>
+        </div>
+      </div>
+      <!-- 2 IT Support & Managed Services -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">OPS</div>
+          <div class="service-code">SRV-02</div>
+        </div>
+        <h3>IT Support & Managed Services</h3>
+        <p>Proactive monitoring, helpdesk, and full lifecycle management — keep your business running smoothly.</p>
+        <div class="service-tags">
+          <span class="service-tag">NOC</span>
+          <span class="service-tag">SLA</span>
+          <span class="service-tag">Observability</span>
+        </div>
+      </div>
+      <!-- 3 Cloud Computing Services -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">CLD</div>
+          <div class="service-code">SRV-03</div>
+        </div>
+        <h3>Cloud Computing Services</h3>
+        <p>AWS, Azure, GCP expertise. Migration, optimization, and serverless architectures for agility.</p>
+        <div class="service-tags">
+          <span class="service-tag">AWS</span>
+          <span class="service-tag">Azure</span>
+          <span class="service-tag">FinOps</span>
+        </div>
+      </div>
+      <!-- 4 Cybersecurity Services -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">SEC</div>
+          <div class="service-code">SRV-04</div>
+        </div>
+        <h3>Cybersecurity Services</h3>
+        <p>Threat detection, compliance, zero-trust frameworks and 24/7 security operations.</p>
+        <div class="service-tags">
+          <span class="service-tag">SOC</span>
+          <span class="service-tag">Zero Trust</span>
+          <span class="service-tag">SIEM</span>
+        </div>
+      </div>
+      <!-- 5 Network & Infrastructure Services -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">NET</div>
+          <div class="service-code">SRV-05</div>
+        </div>
+        <h3>Network & Infrastructure</h3>
+        <p>Design, deployment, SD-WAN, and resilient on-prem/ hybrid network solutions.</p>
+        <div class="service-tags">
+          <span class="service-tag">SD-WAN</span>
+          <span class="service-tag">Hybrid</span>
+          <span class="service-tag">High Availability</span>
+        </div>
+      </div>
+      <!-- 6 Data Management & Analytics -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">DATA</div>
+          <div class="service-code">SRV-06</div>
+        </div>
+        <h3>Data Management & Analytics</h3>
+        <p>Data warehousing, BI dashboards, real-time analytics & data governance.</p>
+        <div class="service-tags">
+          <span class="service-tag">BI</span>
+          <span class="service-tag">ETL</span>
+          <span class="service-tag">Governance</span>
+        </div>
+      </div>
+      <!-- 7 IT Consulting & Digital Transformation -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">DX</div>
+          <div class="service-code">SRV-07</div>
+        </div>
+        <h3>IT Consulting & Digital Transformation</h3>
+        <p>Strategy-led modernization, process automation, and change management.</p>
+        <div class="service-tags">
+          <span class="service-tag">Advisory</span>
+          <span class="service-tag">Automation</span>
+          <span class="service-tag">Roadmap</span>
+        </div>
+      </div>
+      <!-- 8 Telecommunications Services -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">TEL</div>
+          <div class="service-code">SRV-08</div>
+        </div>
+        <h3>Telecommunications Services</h3>
+        <p>Unified comms, VoIP, SIP trunking and managed connectivity for hybrid work.</p>
+        <div class="service-tags">
+          <span class="service-tag">VoIP</span>
+          <span class="service-tag">SIP</span>
+          <span class="service-tag">UCaaS</span>
+        </div>
+      </div>
+      <!-- 9 AI & Emerging Technologies -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">AI</div>
+          <div class="service-code">SRV-09</div>
+        </div>
+        <h3>AI & Emerging Technologies</h3>
+        <p>Generative AI, computer vision, LLM integration and intelligent automation.</p>
+        <div class="service-tags">
+          <span class="service-tag">LLM</span>
+          <span class="service-tag">MLOps</span>
+          <span class="service-tag">Automation</span>
+        </div>
+      </div>
+      <!-- bonus: additional card for completeness but already included 9 distinct services, one extra to exceed -->
+      <div class="service-card">
+        <div class="service-top">
+          <div class="service-icon">EDGE</div>
+          <div class="service-code">SRV-10</div>
+        </div>
+        <h3>Smart Automation & Edge</h3>
+        <p>IoT enablement, edge computing and RPA to unlock new operational efficiencies.</p>
+        <div class="service-tags">
+          <span class="service-tag">IoT</span>
+          <span class="service-tag">Edge</span>
+          <span class="service-tag">RPA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Additional Service Showcase: Integrated solutions -->
+<section class="showcase-section">
+  <div class="container">
+    <div class="showcase-grid">
+      <div class="showcase-left">
+        <h2>Integrated solutions <br><span>from AI to Infrastructure</span></h2>
+        <p class="muted">Paragon IT unifies software, cloud, security, data and networks under one roof — delivering measurable business outcomes.</p>
+        <a href="#" class="btn-outline">Learn more →</a>
+      </div>
+      <div class="showcase-right">
+        <div class="mini-card">
+          <div class="mini-icon">CERT</div>
+          <p class="mini-title">ISO 27001</p>
+          <small class="mini-sub">Certified</small>
+        </div>
+        <div class="mini-card">
+          <div class="mini-icon">SLA</div>
+          <p class="mini-title">99.99%</p>
+          <small class="mini-sub">SLA Uptime</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Quote -->
+<!-- Solutions Section -->
+<section class="solutions-section section" id="solutions-list">
+  <div class="container">
+    <div class="section-header">
+      <h2>Solutions Tailored for Your Business</h2>
+      <p>Turnkey platforms and repeatable architectures that scale across cloud, edge and on-premise environments.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="solution-card">
+        <h4>Cloud Modernization</h4>
+        <p>Migration, FinOps, and cloud-native re-architecture to reduce costs and accelerate delivery.</p>
+      </div>
+      <div class="solution-card">
+        <h4>Zero-Trust Security</h4>
+        <p>End-to-end security architectures, identity-centric controls and continuous compliance.</p>
+      </div>
+      <div class="solution-card">
+        <h4>Data & AI Platforms</h4>
+        <p>Production-ready data lakes, MLOps pipelines, and LLM integrations for actionable intelligence.</p>
+      </div>
+      <div class="solution-card">
+        <h4>Managed Infrastructure</h4>
+        <p>24/7 platform operations, observability, and SRE practices to keep systems resilient.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Insights Section -->
+<section class="insights-section" id="insights">
+  <div class="container">
+    <div class="section-header">
+      <h2>Insights</h2>
+      <p>Expert analysis, practical playbooks and case studies to inform your technology roadmap.</p>
+    </div>
+    <div class="insights-grid">
+      <article class="insight-card">
+        <div class="meta">May 2026 • 7 min read</div>
+        <h5>How to build a secure hybrid cloud platform</h5>
+        <p>Practical steps to design networks, enforce policy and enable secure developer workflows.</p>
+      </article>
+      <article class="insight-card">
+        <div class="meta">Apr 2026 • 5 min read</div>
+        <h5>Reducing cloud costs without sacrificing performance</h5>
+        <p>Techniques to optimize workloads, right-size resources and implement cost-aware architectures.</p>
+      </article>
+      <article class="insight-card">
+        <div class="meta">Mar 2026 • 6 min read</div>
+        <h5>Applying LLMs safely inside the enterprise</h5>
+        <p>Governance, prompt engineering, and secure data flows for generative AI adoption.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Companies We Serve -->
+<section class="partners-section" id="partners">
+  <div class="container">
+    <div class="section-header">
+      <h2>Companies We Serve</h2>
+      <p>Selected organizations we provide infrastructure, security, data and AI services to.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <img src="assets/akuapem-community-bank.png" alt="Akuapem Community Bank" class="partner-logo">
+        <div class="partner-name">Akuapem Community Bank</div>
+        <div class="partner-desc">Cloud infrastructure & managed services.</div>
+      </div>
+      <div class="partner-card">
+        <img src="assets/infra-tech-engineering.png" alt="Infra-Tech Engineering" class="partner-logo">
+        <div class="partner-name">Infra-Tech Engineering</div>
+        <div class="partner-desc">Infrastructure engineering and operational services.</div>
+      </div>
+      <div class="partner-card">
+        <img src="assets/autojunk-logo.PNG" alt="Auto Junk" class="partner-logo">
+        <div class="partner-name">Auto Junk</div>
+        <div class="partner-desc">Fleet & salvage inventory systems.</div>
+      </div>
+      <div class="partner-card">
+        <img src="assets/partner-zen.png" alt="Zen Data" class="partner-logo">
+        <div class="partner-name">Zen Data</div>
+        <div class="partner-desc">Data platform & analytics.</div>
+      </div>
+      <div class="partner-card">
+        <img src="assets/partner-ignite.png" alt="Ignite AI" class="partner-logo">
+        <div class="partner-name">Ignite AI</div>
+        <div class="partner-desc">AI & machine learning engineering.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Quote -->
+<div class="cta-section">
+  <h3>Ready to elevate your technology landscape?</h3>
+  <p>Partner with Paragon IT — where innovation meets reliability. Get a custom roadmap for your business.</p>
+  <a href="#" class="btn-light">Talk to an expert →</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 style="color:rgb(13, 13, 13); font-size: 1.6rem;">Paragon IT</h3>
+        <p>Technology Done Right. Empowering businesses through modern IT, secure cloud, AI and data intelligence.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#">Software Development</a></li>
+          <li><a href="#">Cloud & DevOps</a></li>
+          <li><a href="#">Cybersecurity</a></li>
+          <li><a href="#">Data & Analytics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Insights</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@paragonit.co.uk">hello@paragonit.co.uk</a></li>
+          <li><a href="tel:+233501990000">+233 501990000</a></li>
+          <li><a href="#">LinkedIn / X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 Paragon IT — Technology Done Right. Paragon IT™ is a trademark of Paragon IT. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- subtle interactive cta -->
+<!-- Service Detail Modal -->
+<div id="service-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="service-modal-title">
+  <div class="modal-inner" role="document">
+    <button class="modal-close" aria-label="Close modal">✕</button>
+    <h3 id="service-modal-title">Service Title</h3>
+    <p id="service-modal-desc">Service overview goes here.</p>
+    <ul class="modal-bullets" id="service-modal-bullets"></ul>
+    <div style="margin-top:18px;"><a href="#contact" class="btn-primary">Talk to an expert</a></div>
+  </div>
+</div>
+<script>
+  // Smooth scroll for anchor links & any interactive micro interaction
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if(targetElem) {
+        e.preventDefault();
+        const navbar = document.querySelector('.navbar');
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const extra = window.matchMedia('(max-width:800px)').matches ? 12 : 24;
+        const offset = navHeight + extra;
+        const top = targetElem.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+        if(history.replaceState) history.replaceState(null, '', targetId);
+        // If the clicked anchor is in the footer or elsewhere, ensure the matching nav link becomes active immediately
+        try{
+          const currentActive = document.querySelector('.nav-links a.active');
+          if(currentActive) currentActive.classList.remove('active');
+          const matchingNav = document.querySelector('.nav-links a[href="' + targetId + '"]');
+          if(matchingNav) matchingNav.classList.add('active');
+        } catch(e) { /* ignore DOM errors */ }
+      }
+    });
+  });
+  // Add a tiny dynamic year update
+  const copyright = document.querySelector('.copyright');
+  if(copyright) {
+    const year = new Date().getFullYear();
+    copyright.innerHTML = copyright.innerHTML.replace('2025', year);
+  }
+
+  // Service detail modal: attach Learn more buttons, populate and handle modal
+  (function(){
+    const serviceDetails = {
+      'Software Development': {
+        short: 'Custom enterprise software, scalable apps, and DevOps pipelines.',
+        long: 'We design, build and operate custom software tailored to your business needs — from MVPs to large-scale systems.',
+        bullets: ['Full lifecycle engineering (design → prod)', 'Modern CI/CD & DevOps practices', 'API-first, scalable architectures', 'SLA-backed support and maintenance']
+      },
+      'IT Support & Managed Services': {
+        short: 'Proactive monitoring, helpdesk and lifecycle management.',
+        long: '24/7 managed services delivering stable, observable infrastructure and responsive support.',
+        bullets: ['Proactive monitoring & alerting', 'Dedicated helpdesk & NOC', 'Patch management & backups', 'Incident response and post-mortems']
+      },
+      'Cloud Computing Services': {
+        short: 'Migration, optimization and serverless architectures.',
+        long: 'Cloud migration and modernization that reduces cost and increases developer velocity.',
+        bullets: ['Cloud readiness assessments', 'Migration planning & execution', 'Cost optimization (FinOps)', 'Cloud-native architectures & serverless']
+      },
+      'Cybersecurity Services': {
+        short: 'Threat detection, zero-trust frameworks and 24/7 security.',
+        long: 'Comprehensive security services to protect data, systems and compliance posture.',
+        bullets: ['Vulnerability assessments & pen testing', 'SIEM & threat monitoring', 'Identity & access governance', 'Incident response readiness']
+      },
+      'Network & Infrastructure': {
+        short: 'Design, deployment and resilient network solutions.',
+        long: 'Robust network design and hybrid infrastructure to meet performance and availability needs.',
+        bullets: ['SD-WAN and hybrid networking', 'On-prem & colocation design', 'Observability and capacity planning', 'High-availability architectures']
+      },
+      'Data Management & Analytics': {
+        short: 'Data warehousing, BI dashboards and governance.',
+        long: 'Turn data into actionable insights with modern data platforms and analytics pipelines.',
+        bullets: ['Data lakes & warehouses', 'ETL/ELT pipelines', 'BI dashboards & reporting', 'Data governance and cataloging']
+      },
+      'IT Consulting & Digital Transformation': {
+        short: 'Strategy-led modernization and process automation.',
+        long: 'Advisory services to accelerate digital transformation and streamline operations.',
+        bullets: ['Roadmapping & advisory', 'Process automation & RPA', 'Change management', 'Platform selection & vendor evaluation']
+      },
+      'Telecommunications Services': {
+        short: 'Unified comms, VoIP and managed connectivity.',
+        long: 'Delivering reliable communications and connectivity solutions for hybrid and remote teams.',
+        bullets: ['VoIP & SIP trunking', 'Unified communications', 'Managed connectivity & SLAs', 'Carrier relationships & cost management']
+      },
+      'AI & Emerging Technologies': {
+        short: 'Generative AI, vision and LLM integration.',
+        long: 'Practical AI solutions from prototyping to production, with governance and MLOps.',
+        bullets: ['LLM integrations & prompt engineering', 'Computer vision & ML pipelines', 'MLOps and model governance', 'Proof-of-concepts to productionization']
+      },
+      'Smart Automation & Edge': {
+        short: 'IoT enablement, edge computing and RPA.',
+        long: 'Edge and automation solutions that reduce latency and operational costs.',
+        bullets: ['IoT device integration', 'Edge compute deployments', 'RPA and workflow automation', 'Operational analytics at the edge']
+      }
+    };
+
+    const serviceIndicators = {
+      'Software Development': { state: 'Deployment Active', metric: 'CI Pass 99.2%', level: 'info' },
+      'IT Support & Managed Services': { state: 'Monitoring 24/7', metric: 'Avg Response 6m', level: 'ok' },
+      'Cloud Computing Services': { state: 'Cloud Ops Online', metric: 'Uptime 99.99%', level: 'ok' },
+      'Cybersecurity Services': { state: 'Threat Shield On', metric: 'SOC Live Feed', level: 'warn' },
+      'Network & Infrastructure': { state: 'Backbone Stable', metric: 'Latency 18ms', level: 'ok' },
+      'Data Management & Analytics': { state: 'Pipelines Healthy', metric: 'ETL SLA Met', level: 'info' },
+      'IT Consulting & Digital Transformation': { state: 'Program in Flight', metric: 'Milestones 12/12', level: 'info' },
+      'Telecommunications Services': { state: 'Voice Core Ready', metric: 'QoS 4.7/5', level: 'ok' },
+      'AI & Emerging Technologies': { state: 'Model Serving', metric: 'Inference p95 220ms', level: 'ok' },
+      'Smart Automation & Edge': { state: 'Edge Fleet Online', metric: 'Nodes 128 Active', level: 'info' }
+    };
+
+    const modal = document.getElementById('service-modal');
+    const modalTitle = document.getElementById('service-modal-title');
+    const modalDesc = document.getElementById('service-modal-desc');
+    const modalBullets = document.getElementById('service-modal-bullets');
+    const modalClose = modal ? modal.querySelector('.modal-close') : null;
+
+    function openModalFor(key){
+      const data = serviceDetails[key] || null;
+      modalTitle.textContent = key;
+      modalDesc.textContent = data ? data.long : '';
+      modalBullets.innerHTML = '';
+      if(data && data.bullets){
+        data.bullets.forEach(b => {
+          const li = document.createElement('li'); li.textContent = b; modalBullets.appendChild(li);
+        });
+      }
+      modal.setAttribute('aria-hidden','false');
+      // focus trap: focus close button
+      if(modalClose) modalClose.focus();
+      document.addEventListener('keydown', escHandler);
+    }
+
+    function closeModal(){
+      if(!modal) return;
+      modal.setAttribute('aria-hidden','true');
+      document.removeEventListener('keydown', escHandler);
+    }
+
+    function escHandler(e){ if(e.key === 'Escape') closeModal(); }
+
+    if(modalClose) modalClose.addEventListener('click', closeModal);
+    if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+
+    // Append Learn more buttons to each service card and wire up
+    document.querySelectorAll('.service-card').forEach(card => {
+      const titleElem = card.querySelector('h3');
+      const title = titleElem ? titleElem.innerText.trim() : null;
+
+      const indicator = (title && serviceIndicators[title]) || { state: 'Operations Online', metric: 'SLA Active', level: 'ok' };
+      const status = document.createElement('div');
+      status.className = 'service-status';
+
+      const state = document.createElement('span');
+      state.className = 'service-state';
+      const dot = document.createElement('span');
+      dot.className = 'service-dot ' + (indicator.level || 'ok');
+      const stateText = document.createElement('span');
+      stateText.textContent = indicator.state;
+      state.appendChild(dot);
+      state.appendChild(stateText);
+
+      const metric = document.createElement('span');
+      metric.className = 'service-metric';
+      metric.textContent = indicator.metric;
+
+      status.appendChild(state);
+      status.appendChild(metric);
+      card.appendChild(status);
+
+      const btn = document.createElement('a');
+      btn.href = '#';
+      btn.className = 'btn-outline service-more-btn';
+      btn.textContent = 'Learn more';
+      btn.addEventListener('click', function(e){ e.preventDefault(); if(title) openModalFor(title); });
+      card.appendChild(btn);
+    });
+  })();
+
+  // Active nav highlighting: observes sections and toggles .active on matching nav links
+  (function(){
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
+      .filter(a => a.getAttribute('href') !== '#');
+
+    const sections = navLinks.map(a => {
+      const id = a.getAttribute('href');
+      return document.querySelector(id);
+    }).filter(Boolean);
+
+    if(!sections.length) return;
+
+    const linkFor = href => document.querySelector('.nav-links a[href="' + href + '"]');
+
+    let activeLink = null;
+
+    const observer = new IntersectionObserver((entries) => {
+      // find the entry with largest intersectionRatio that's intersecting
+      const visible = entries.filter(e => e.isIntersecting);
+      if(visible.length === 0) return;
+      visible.sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+      const top = visible[0];
+      const id = '#' + top.target.id;
+      if(activeLink) activeLink.classList.remove('active');
+      const link = linkFor(id);
+      if(link){
+        link.classList.add('active');
+        activeLink = link;
+      }
+    }, (function(){
+      const navbar = document.querySelector('.navbar');
+      const navHeight = navbar ? navbar.offsetHeight : 0;
+      const topOffset = Math.round(navHeight + 20);
+      return { root: null, threshold: [0.25, 0.5, 0.75], rootMargin: `-${topOffset}px 0px -40% 0px` };
+    })());
+
+    sections.forEach(s => observer.observe(s));
+
+    // ensure correct active state on load (in case page opened with hash)
+    window.addEventListener('load', () => {
+      const h = window.location.hash;
+      if(h){
+        const l = linkFor(h);
+        if(l){ l.classList.add('active'); activeLink = l; }
+      }
+    });
+    // Make navbar fixed-accessible: set body padding to navbar height so content isn't hidden
+    const navbar = document.querySelector('.navbar');
+    function updateBodyPaddingAndElev(){
+      if(!navbar) return;
+      const h = navbar.offsetHeight || 72;
+      document.body.style.paddingTop = h + 'px';
+      // add small elevation when not at very top
+      if(window.pageYOffset > 8) navbar.classList.add('fixed-elev'); else navbar.classList.remove('fixed-elev');
+    }
+    updateBodyPaddingAndElev();
+    window.addEventListener('resize', () => updateBodyPaddingAndElev());
+    window.addEventListener('scroll', () => updateBodyPaddingAndElev());
+    // Mobile nav toggle behavior
+    const navToggle = document.querySelector('.nav-toggle');
+    if(navToggle){
+      navToggle.addEventListener('click', function(){
+        const open = navbar.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        // prevent body scroll when menu is open
+        document.body.style.overflow = open ? 'hidden' : '';
+        // recalc padding because navbar height may change when menu opens
+        setTimeout(updateBodyPaddingAndElev, 50);
+      });
+      // close menu when clicking a nav link (use capture to ensure it runs before smooth scroll)
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => {
+          if(navbar.classList.contains('nav-open')){
+            navbar.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded','false');
+            document.body.style.overflow = '';
+            setTimeout(updateBodyPaddingAndElev, 50);
+          }
+        });
+      });
+    }
+  })();
+</script>
+</body>
+</html>
